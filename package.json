@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "jest --verbose true"
+},
   "author": "Viss",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "jest": "^26.4.2",
     "puppeteer": "^5.2.1"
   }
 }
