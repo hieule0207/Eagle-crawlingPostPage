@@ -41,19 +41,20 @@ const puppeteer = require('puppeteer');
     post.sharesCount = await page.$eval('.bp9cbjyn.j83agx80.pfnyh3mw.p1ueia1e > div:nth-child(2)', element => element.innerText);
     console.log(post);
     await page.click('.pcp91wgn', { waitUntil: 'load' });
-     let user = {}
-     await page.waitForSelector('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
-     user.name = await page.$eval('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m', element => element.innerText);
-    // const user = await page.evaluate(() => {
-    //     let userLinks = document.querySelectorAll('a.oajrlxb2.g5ia77u1.qu0x051f.esr5mh6w.e9989ue4.r7d6kgcz.rq0escxv.nhd2j8a9.nc684nl6.p7hjln8o.kvgmc6g5.cxmmr5t8.oygrvhab.hcukyx3x.jb3vyjys.rz4wbd8a.qt6c0cv9.a8nywdso.i1ao9s8h.esuyzwwr.f1sip0of.lzcic4wl.oo9gr5id.gpro0wi8.lrazzd5p');
-    //     userLinks = [...userLinks];
-    //     let user = userLinks.map(link => ({
-    //         name: link.innerText,
-    //         url: link.getAttribute('href')
-    //     }));
-    //     return user;
-    // });
-     console.log(user);
+    await page.waitForSelector('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
+    // let user = {}
+    // user.name = await page.$eval('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m', element => element.innerText);
+    // user.url = await page.$eval('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a', a => a.getAttribute('href'));
+    const user = await page.evaluate(() => {
+        let userLinks = document.querySelectorAll('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a');
+        userLinks = [...userLinks];
+        let user = userLinks.map(link => ({
+            name: link.innerText,
+            url: link.getAttribute('href')
+        }));
+        return user;
+    });
+    console.log(user);
     //end page
     // //group
     // await page.goto('https://www.facebook.com/groups/Genshinimpact.vi/permalink/776417803092679/', {waitUntil: 'networkidle2'});

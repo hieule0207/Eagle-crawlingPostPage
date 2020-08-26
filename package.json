@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose true"
-},
+  },
   "author": "Viss",
   "license": "ISC",
   "dependencies": {
