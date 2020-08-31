@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose true"
+    "serve": "nodemon index.js"
   },
   "author": "Viss",
   "license": "ISC",
@@ -12,5 +12,8 @@
     "express": "^4.17.1",
     "jest": "^26.4.2",
     "puppeteer": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

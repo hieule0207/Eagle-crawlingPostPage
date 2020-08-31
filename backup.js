@@ -28,8 +28,8 @@
 // })();
 
 //profile
-// try {
-//     let url = 'https://www.facebook.com/linh.lun.5686'
+//try {
+//     let url = 'https://www.facebook.com/chrispham211'
 //     await page.goto(url, { waitUntil: 'networkidle2' });
 //     let profile = {};
 //     const name = await page.evaluate(() => {
@@ -98,4 +98,46 @@
 // } catch (error) {
 //     console.log(error)
 // }
-// //await browser.close();
+//await browser.close();
+(async () => {
+    const browser = await puppeteer.launch({ headless: false });
+    const context = browser.defaultBrowserContext();
+    context.overridePermissions("https://www.facebook.com", ["geolocation", "notifications"]);
+    const page = await browser.newPage();
+    // await page.setDefaultNavigationTimeout(0); 
+    await page.setViewport({
+        width: 1280,
+        height: 500
+    });
+    await page.goto('https://www.facebook.com/');
+    const usernameBox = await page.$('#email');
+    await usernameBox.type('hieule0207@gmail.com');
+
+    const passwordBox = await page.$('#pass');
+    await passwordBox.type('tpg123!@#');
+
+    const loginButton = await page.$('#u_0_b');
+    await loginButton.press('Enter');
+    await page.waitForNavigation();
+    // //page
+    await page.goto('https://www.facebook.com/T1LoL/posts/2799681440266003', { waitUntil: 'networkidle2' });
+    let post = {}
+    post.content = await page.$eval('.ecm0bbzt.hv4rvrfc.ihqw7lf3.dati1w0a', element => element.innerText);
+    post.reactionsCount = await page.$eval('.pcp91wgn', element => element.innerText);
+    post.commentsCount = await page.$eval('.bp9cbjyn.j83agx80.pfnyh3mw.p1ueia1e > div:nth-child(1)', element => element.innerText);
+    post.sharesCount = await page.$eval('.bp9cbjyn.j83agx80.pfnyh3mw.p1ueia1e > div:nth-child(2)', element => element.innerText);
+    console.log(post);
+    await page.click('.pcp91wgn', { waitUntil: 'load' });
+    list = await page.$eval('.j83agx80.cbu4d94t.buofh1pr',  e => {e.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' })});
+    await page.waitForSelector('.j83agx80.cbu4d94t.buofh1pr > div');
+    await page.waitForSelector('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
+    const user = await page.evaluate(() => {
+        let _user = document.querySelectorAll('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a');
+        _user = [..._user];
+        let user = _user.map(link => ({
+            name: link.innerText,
+            url: link.getAttribute('href')
+        }));
+        return user;
+    });
+    console.log(user);
