@@ -1,0 +1,79 @@
+<%- include("head") %>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <%- include("sidebar") %>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <%- include("navbar") %>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Choose platform and paste the Link!!!</h1>
+                                </div>
+                                <form class="user" method="post" action="/crawling/crawl">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <select class=" form-control" name="platform">
+                                                <option value="FB">FB</option>
+                                                <option value="Instagram">Instagram</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control"
+                                                id="exampleRepeatPassword" placeholder="Post's url" name="url">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <i class="fas fa-spider"></i>   Let Crawl   <i class="fas fa-spider"></i>
+                                    </button>
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @Eagle2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <%- include("scrolltotop") %>
+    <!-- Scroll to Top Button-->
+
+    <%- include("injectjs") %>
+</body>
+
+</html>

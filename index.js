@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const fs = require("fs");
 (async () => {
     const browser = await puppeteer.launch({ headless: false });
     const context = browser.defaultBrowserContext();
@@ -19,7 +20,7 @@ const puppeteer = require('puppeteer');
     const loginButton = await page.$('#u_0_b');
     await loginButton.press('Enter');
     await page.waitForNavigation();
-    // //page
+    //page
     await page.goto('https://www.facebook.com/T1LoL/posts/2799681440266003', { waitUntil: 'networkidle2' });
     let post = {};
     post.content = await page.$eval('.ecm0bbzt.hv4rvrfc.ihqw7lf3.dati1w0a', element => element.innerText);
@@ -48,6 +49,7 @@ const puppeteer = require('puppeteer');
         })
         console.log(user);
         //end page
+        let _profile = [];
         for (var i = 0; i < user.length; i++) {
             let tempUrl = user[i].url;
             let temp = tempUrl.indexOf("__cft__") - 1;
@@ -56,7 +58,6 @@ const puppeteer = require('puppeteer');
             if (url.search("id=") != -1) {
                 const ProfilePage = await browser.newPage();
                 await ProfilePage.goto(url, { waitUntil: 'networkidle2' });
-                let _profile = {};
                 const name = await ProfilePage.evaluate(() => {
                     const element = document.querySelector('.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.bp9cbjyn.j83agx80');
                     if (element)
@@ -117,20 +118,30 @@ const puppeteer = require('puppeteer');
                         return element.innerText;
                     return '';
                 });
-                _profile.name = name;
-                _profile.nickname = nickname;
-                _profile.gender = gender;
-                _profile.birthday = birthday;
-                _profile.homeTown = homeTown;
-                _profile.currentTown = currentTown;
-                _profile.currentJob = currentJob;
-                _profile.Education = Education;
-                console.log(_profile);
+                // _profile.name = name;
+                // _profile.nickname = nickname;
+                // _profile.gender = gender;
+                // _profile.birthday = birthday;
+                // _profile.homeTown = homeTown;
+                // _profile.currentTown = currentTown;
+                // _profile.currentJob = currentJob;
+                // _profile.Education = Education;
+                // console.log(_profile);
+                _profile.push({
+                    url,
+                    name,
+                    nickname,
+                    gender,
+                    birthday,
+                    homeTown,
+                    currentTown,
+                    currentJob,
+                    Education
+                });
                 await ProfilePage.close();
             } else {
                 const ProfilePage = await browser.newPage();
                 await ProfilePage.goto(url, { waitUntil: 'networkidle2' });
-                let _profile = {};
                 const name = await ProfilePage.evaluate(() => {
                     const element = document.querySelector('.gmql0nx0.l94mrbxd.p1ri9a11.lzcic4wl.bp9cbjyn.j83agx80');
                     if (element)
@@ -191,17 +202,21 @@ const puppeteer = require('puppeteer');
                         return element.innerText;
                     return '';
                 });
-                _profile.name = name;
-                _profile.nickname = nickname;
-                _profile.gender = gender;
-                _profile.birthday = birthday;
-                _profile.homeTown = homeTown;
-                _profile.currentTown = currentTown;
-                _profile.currentJob = currentJob;
-                _profile.Education = Education;
-                console.log(_profile);
+                _profile.push({
+                    url,
+                    name,
+                    nickname,
+                    gender,
+                    birthday,
+                    homeTown,
+                    currentTown,
+                    currentJob,
+                    Education
+                });
                 await ProfilePage.close();
             }
         };
-    }, 30000);
+        fs.writeFileSync('data.json', JSON.stringify(_profile))
+    }, 180000);
+
 })();
