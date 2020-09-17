@@ -6,7 +6,8 @@ const fs = require("fs");
 const app = express();
 const morgan = require("morgan");
 const path = require("path");
-
+const flash = require('req-flash');
+const session = require('express-session');
 app.set('view engine', 'ejs')
 app.use(express.static('public'));
 
@@ -44,10 +45,28 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(morgan("dev"));
-
+app.use(session({ secret: '123' }));
+app.use(flash());
 // public images
 // app.use("/uploads/cntt", express.static(path.join(__dirname, "uploads/cntt")));
+//============firebase================================
+// var firebase = require("firebase/app");
+// require("firebase/auth");
 
+// var firebaseConfig = {
+//     apiKey: "AIzaSyBqIy85m7AHKDKvSBUbQvJM8KJnzE73yU8",
+//     authDomain: "aweaglecrawlingtools-1a3a8.firebaseapp.com",
+//     databaseURL: "https://aweaglecrawlingtools-1a3a8.firebaseio.com",
+//     projectId: "aweaglecrawlingtools-1a3a8",
+//     storageBucket: "aweaglecrawlingtools-1a3a8.appspot.com",
+//     messagingSenderId: "809928933659",
+//     appId: "1:809928933659:web:12e21a120581a7760653be",
+//     measurementId: "G-MDDFLGRRQS"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
+//====================================================
 app.use("/", require("./api/api"));
 
 app.get("/", (req, res) => {
