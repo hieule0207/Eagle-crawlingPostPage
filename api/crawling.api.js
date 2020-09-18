@@ -13,54 +13,58 @@ var firebaseConfig = {
     appId: "1:809928933659:web:12e21a120581a7760653be",
     measurementId: "G-MDDFLGRRQS"
 };
-function isAuthenticated(req, res, next) {
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var isAnonymous = user.isAnonymous;
-            var uid = user.uid;
-            var providerData = user.providerData;
-            req.body.loginState = true;
-            next();
-        } else {
-            // User is signed out.
-            req.body.loginState = false;
-            next();
-            // ...
-        }
-    });
-}
-function isLogin(req, res, next) {
-    console.log("join 1");
-    console.log(req.body)
-    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).catch(function (error) {
-        // Handle Errors here.
-        req.body.loginErr = error.message;
-        req.body.isLogin = false;
-        next();
-        // ...
-    });
-    next();
-}
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-//====================================================
+// var provider = new firebase.auth.GoogleAuthProvider();
+//  provider.addScope(‘profile’);
+//  provider.addScope(‘email’);
+//  provider.addScope(‘https://www.googleapis.com/auth/plus.me');
+
+function isAuthenticated(req, res, next) {
+    var user = firebase.auth().currentUser;
+    if (user !== null) {
+        req.user = user;
+        next();
+    } else {
+        res.redirect('/crawling/login');
+    }
+}
+function doLogin(req, res, next) {
+    console.log(req.body)
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then((result) => {
+        req.user = result.user;
+        return next();
+    }).catch(function (error) {
+        // Handle Errors here.
+        req.body.loginErr = error.message;
+        return next();
+        // ...
+    });
+}
+// function doLoginGG(req, res, next) {
+//     firebase.auth().signInWithPopup(ggProvider).then(function (result) {
+//         var token = result.credential.accessToken;
+//         req.user = result.user;
+//         req.body.isLogin == true;
+//         next();
+//     }).catch(function (error) {
+//         console.error('Error: hande error here>>>', error.code)
+//     })
+// }
+// //====================================================
 //=======dashboard====================================
-router.get('/index', isAuthenticated, (req, res) => {
+router.get('/index', isAuthenticated, async (req, res) => {
+    await res.render('index.ejs', { title: "Eagle Dashboard", user: req.user.email })
+});
+//=======crawling=====================================
+router.get('/crawl', isAuthenticated, async (req, res) => {
     console.log(req.body.loginState)
     if (req.body.loginState == true) {
-        res.render('index.ejs', { title: "Eagle Dashboard" })
+        res.render('crawlingForm.ejs', { title: "Eagle Dashboard" })
     } else {
         res.redirect('/crawling/login')
     }
-});
-//=======crawling=====================================
-router.get('/crawl', async (req, res) => {
-    res.render('crawlingForm.ejs', { title: "Eagle Dashboard" })
 });
 router.post('/crawl', async (req, res) => {
     console.log(req.body)
@@ -70,17 +74,21 @@ router.post('/crawl', async (req, res) => {
 router.get('/login', async (req, res) => {
     res.render('login.ejs', { title: "Eagle Dashboard" })
 });
-router.post('/login', isLogin, async (req, res) => {
-    console.log("join")
-    console.log(req.body.isLogin)
-    if (req.body.isLogin) {
-        if (req.body.isLogin == false) {
-            errMess = req.body.loginErr;
-            res.render('login.ejs', { title: "Eagle Dashboard", errMess: errMess })
-        }
+router.post('/login', doLogin, async (req, res) => {
+    if (req.user) {
+        return res.redirect('/crawling/index')
+    } else {
+        return res.render('login.ejs', { title: "Eagle Dashboard" });
     }
-    res.redirect('/crawling/index')
 });
+// router.post('/loginviagg', doLoginGG, async (req, res) => {
+//     if (req.body.isLogin) {
+//         if (req.body.isLogin == false) {
+//             res.render('login.ejs', { title: "Eagle Dashboard" })
+//         }
+//     }
+//     return res.redirect('/crawling/index');
+// });
 //=======register=====================================
 router.get('/register', async (req, res) => {
     res.render('register.ejs', { title: "Eagle Dashboard" })
@@ -93,15 +101,13 @@ router.post('/register', async (req, res) => {
         message = error.message;
     });
     res.render('register.ejs', { title: "Eagle Dashboard" })
+});//==========signout=================================
+router.post('/logout', async (req, res) => {
+    firebase.auth().signOut()
+        .catch(function (err) {
+            // Handle errors
+            console.error(err)
+        });
+    return res.redirect('/crawling/login')
 });
-// function isAuthenticated(req, res, next) {
-//     var user = firebase.auth().currentUser;
-//     console.log(user)
-//     if (user !== null) {
-//         req.user = user;
-//         next();
-//     } else {
-//         res.send('/login');
-//     }
-// }
 module.exports = router;
