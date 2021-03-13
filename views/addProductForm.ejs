@@ -1,0 +1,149 @@
+<%- include("head") %>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <%- include("sidebar") %>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <%- include("navbar") %>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Add new Product</h1>
+                                </div>
+                                <form class="user" method="post" action="/crawling/product-add" enctype="multipart/form-data">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" disabled class="form-control" placeholder="Mã SP"
+                                                name="maSP">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" placeholder="Tên SP"
+                                                name="tenSP">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <select class=" form-control" name="loaiSP">
+                                                <% for ( let item of data.cate ) { %>
+                                                <option value="<%= item.tenLoaiSP %>"><%= item.tenLoaiSP %></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" placeholder="Màu sắc "
+                                                name="mauSac">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="Giá tiền nhập / SP " name="giaTienNhap">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="Giá tiền bán / SP " name="giaTienBan">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="Số lượng sản phẩm nhập kho " name="soLuongNhapKho">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="Số lượng sản phẩm tồn kho " name="soLuongTon">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <select class=" form-control" name="loaiKhuyenMai">
+                                                <option value="khongKhuyenMai">Không khuyến mãi</option>
+                                                <option value="salesPercent">Sales %</option>
+                                                <option value="salesAmount">Sales vào giá SP</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" placeholder="Giá trị khuyến mãi"
+                                                name="giaTriKhuyenMai">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type="file" name="avatar" id="imageUpload"
+                                                    accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload" style="position: relative;">
+                                                    <i class="fas fa-pen"
+                                                        style="position: absolute;bottom: 10%;left: 27%;"></i></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="Mô tả ngắn về SP " name="moTaNgan">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0 text-center" style="margin: 0 auto">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                <i class="far fa-save"></i> Add 
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @Eagle2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <%- include("scrolltotop") %>
+    <!-- Scroll to Top Button-->
+
+    <%- include("injectjs") %>
+</body>
+
+</html>

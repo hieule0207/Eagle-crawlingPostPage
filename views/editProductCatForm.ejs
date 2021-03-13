@@ -1,0 +1,96 @@
+<%- include("head") %>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <%- include("sidebar") %>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <%- include("navbar") %>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Edit Product Cat</h1>
+                                </div>
+                                <form class="user" method="post" action="/crawling/product-cat-edit">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id=""
+                                                name="_id" value="<%=productCat._id %>" readonly hidden>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control" id="" placeholder="Tên loại SP"
+                                                name="tenLoaiSP" value="<%=productCat.tenLoaiSP %>" >
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" placeholder="Tên SP"
+                                                name="moTaNgan" value="<%=productCat.moTaNgan %>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 mb-3 mb-sm-0">
+                                            <select class=" form-control" name="trangThai">
+                                                <option value="<%=productCat.trangThai %>" readonly>Bạn có muốn tiếp tục kinh doanh lại Sản phẩm này ? </option>
+                                                <option value="1">Kinh doanh lại Loại Sản phẩm này</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0 text-center" style="margin: 0 auto">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                <i class="far fa-save"></i> Submit changes
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @Eagle2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <%- include("scrolltotop") %>
+    <!-- Scroll to Top Button-->
+
+    <%- include("injectjs") %>
+</body>
+
+</html>

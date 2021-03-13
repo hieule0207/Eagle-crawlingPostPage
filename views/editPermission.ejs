@@ -1,0 +1,126 @@
+<%- include("head") %>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <%- include("sidebar") %>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <%- include("navbar") %>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Edit Permission</h1>
+                                </div>
+                                <form class="user" method="post" action="/crawling/account-edit">
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="" name="_id"
+                                                value="<%=Account._id %>" readonly hidden>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="align-items: center">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" name="email"
+                                                value="<%=Account.email %>" readonly>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="m-2">
+                                                <input type="checkbox" id="addProduct" name="addProduct" value="true" />
+                                                <label for="addProduct">Quyền được thêm SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="editProduct" name="editProduct"
+                                                value="true" />
+                                                <label for="editProduct">Quyền được chỉnh sửa SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="checkListProduct" name="checkListProduct"
+                                                value="true" />
+                                                <label for="checkListProduct">Quyền được xem danh sách SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="deleteProduct" name="deleteProduct"
+                                                value="true" />
+                                                <label for="deleteProduct">Quyền được xóa SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="addProductCat" name="addProductCat"
+                                                value="true" />
+                                                <label for="addProductCat">Quyền được thêm loại SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="editProductCat" name="editProductCat"
+                                                value="true" />
+                                                <label for="editProductCat">Quyền được chỉnh sửa loại SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="checkListProductCat"
+                                                    name="checkListProductCat"
+                                                    value="true" />
+                                                <label for="checkListProductCat">Quyền được xem danh sách loại
+                                                    SP</label>
+                                            </p>
+                                            <p class="m-2">
+                                                <input type="checkbox" id="deleteProductCat" name="deleteProductCat"
+                                                value="true" />
+                                                <label for="deleteProductCat">Quyền được xóa loại SP</label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0 text-center" style="margin: 0 auto">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                <i class="far fa-save"></i> Submit changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </form>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @Eagle2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <%- include("scrolltotop") %>
+    <!-- Scroll to Top Button-->
+
+    <%- include("injectjs") %>
+</body>
+
+</html>

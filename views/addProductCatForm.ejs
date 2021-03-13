@@ -25,28 +25,26 @@
                         <div class="col-lg-12">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Choose platform and paste the Link!!!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Add new Product Category</h1>
                                 </div>
-                                <form class="user" method="post" action="/crawling/crawl">
+                                <form class="user" method="post" action="/crawling/product-cat-add">
                                     <div class="form-group row">
-                                        <div class="col-sm-3 mb-3 mb-sm-0">
-                                            <select class=" form-control" name="platform">
-                                                <option value="FB">FB</option>
-                                                <option value="Instagram">Instagram</option>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="" placeholder="Tên Loại SP"
+                                                name="tenLoaiSP">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control"
-                                                id="" placeholder="Post's url" name="url">
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control"
-                                                id="" placeholder="Name of File" name="filename">
+                                            <input type="text" class="form-control" id="" placeholder="Mô tả ngắn về SP"
+                                                name="moTaNgan">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        <i class="fas fa-spider"></i>   Let Crawl   <i class="fas fa-spider"></i>
-                                    </button>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0 text-center" style="margin: 0 auto">
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                <i class="far fa-save"></i> Add
+                                            </button>
+                                        </div>
+                                    </div>
                                     <hr>
                                 </form>
                                 <hr>

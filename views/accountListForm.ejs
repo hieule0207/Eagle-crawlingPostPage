@@ -1,0 +1,175 @@
+<%- include("head") %>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <%- include("sidebar") %>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <%- include("navbar") %>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Account list</h1>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <h1 class="h3 mb-2 text-gray-800">Result</h1>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data report</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Email</th>
+                                                    <th>Thêm SP</th>
+                                                    <th>Chỉnh sửa SP</th>
+                                                    <th>Xem danh sách SP</th>
+                                                    <th>Xóa SP</th>
+                                                    <th>Thêm loại SP</th>
+                                                    <th>Chỉnh sửa loại SP</th>
+                                                    <th>Xem danh sách loại SP</th>
+                                                    <th>Xóa loại SP</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <!-- <tfoot>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Position</th>
+                                                    <th>Office</th>
+                                                    <th>Age</th>
+                                                    <th>Start date</th>
+                                                    <th>Salary</th>
+                                                </tr>
+                                            </tfoot> -->
+                                            <tbody>
+                                                <% if (list) { for ( let item of list ) { %>
+                                                <tr>
+                                                    <td><%= item.email %></td>
+                                                    <td>
+                                                        <% if (item.addProduct == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (item.editProduct == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+
+                                                        <% if (item.checkListProduct == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+
+                                                        <% if (item.deleteProduct == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (item.addProductCat == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (item.editProductCat == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (item.checkListProductCat == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (item.deleteProductCat == true) { %>
+                                                        Có quyền
+                                                        <% } else{ %>
+                                                        Không có quyền
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/crawling/account-edit/<%= item._id %>"
+                                                            class="btn btn-primary btn-block">
+                                                            Edit
+                                                        </a>
+                                                        <a href="/crawling/account-reset/<%= item._id %>"
+                                                            class="btn btn-primary btn-block">
+                                                            Reset Permissions
+                                                        </a></td>
+                                                </tr>
+                                                <% }} %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @Eagle2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <%- include("scrolltotop") %>
+    <!-- Scroll to Top Button-->
+
+    <%- include("injectjs") %>
+</body>
+
+</html>

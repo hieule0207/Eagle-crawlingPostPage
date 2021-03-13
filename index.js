@@ -31,11 +31,13 @@ const fs = require("fs");
     await page.click('.pcp91wgn', { waitUntil: 'load' });
     setTimeout(async function () {
         await page.waitForSelector('.j83agx80.cbu4d94t.buofh1pr > div');
-        await page.waitForSelector('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
+        // await page.waitForSelector('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
+        await page.waitForSelector('.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.rrkovp55.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.fe6kdd0r.mau55g9w.c8b282yb.iv3no6db.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m');
         const user = await page.evaluate(() => {
-            let _user = document.querySelectorAll('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a');
+            // let _user = document.querySelectorAll('.oi732d6d.ik7dh3pa.d2edcug0.qv66sw1b.c1et5uql.a8c37x1j.muag1w35.enqfppq2.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a');
+            let _user = document.querySelectorAll('.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.rrkovp55.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.d3f4x2em.fe6kdd0r.mau55g9w.c8b282yb.iv3no6db.jq4qci2q.a3bd9o3v.ekzkrbhg.oo9gr5id.hzawbc8m a');
+            console.log("_user1" + _user);
             _user = [..._user];
-            console.log(_user);
             let user = [];
             for (var i = 0; i < _user.length; i++) {
                 const name = _user[i].innerText;
@@ -44,11 +46,13 @@ const fs = require("fs");
                     name,
                     url,
                 });
+                console.log(user)
             }
+            console.log(user)
             return user
         })
-        console.log(user);
-        //end page
+        console.log( user);
+        // //end page
         let _profile = [];
         for (var i = 0; i < user.length; i++) {
             let tempUrl = user[i].url;
@@ -217,6 +221,6 @@ const fs = require("fs");
             }
         };
         fs.writeFileSync('data.json', JSON.stringify(_profile))
-    }, 180000);
+    }, 30000);
 
 })();
